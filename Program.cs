@@ -1,27 +1,27 @@
-﻿using System;
+using System;
 
 namespace PortManager
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-			string choice = Menu();
+	class Program
+	{
+		static void Main(string[] args)
+		{
+			int choice = Menu();
 
-			while (choice != "5")
+			while (choice != 5)
 			{
 				switch (choice)
 				{
-					case "1":
+					case 1:
 						AddPort();
 						break;
-					case "2":
+					case 2:
 						RemovePort();
 						break;
-					case "3":
+					case 3:
 						RestartPorts();
 						break;
-					case "4":
+					case 4:
 						ListPorts();
 						break;
 					default:
@@ -52,7 +52,8 @@ namespace PortManager
 			throw new NotImplementedException();
 		}
 
-		private static string Menu()
+
+		private static int Menu()
 		{
 			Console.WriteLine("1. Add Ports");
 			Console.WriteLine("2. Remove Ports");
@@ -60,8 +61,8 @@ namespace PortManager
 			Console.WriteLine("4. List Ports");
 			Console.WriteLine("5. Exit");
 			Console.WriteLine("Choose an option: ");
-			string choice = Console.ReadLine();
+			int choice = int.Parse(Console.ReadLine());
 			return choice;
 		}
-    }
+	}
 }
