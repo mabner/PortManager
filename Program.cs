@@ -32,6 +32,26 @@ namespace PortManager
 
 		}
 
+		private static void ListPorts()
+		{
+			throw new NotImplementedException();
+		}
+
+		private static void RestartPorts()
+		{
+			throw new NotImplementedException();
+		}
+
+		private static void RemovePort()
+		{
+			throw new NotImplementedException();
+		}
+
+		private static void AddPort()
+		{
+			throw new NotImplementedException();
+		}
+
 		private static string Menu()
 		{
 			Console.WriteLine("1. Add Ports");
