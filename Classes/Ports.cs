@@ -19,3 +19,8 @@ namespace PortManager.Classes
 		}
 	}
 }
+
+// for (int i = 0; i < portRange.Length; i++) 
+// {
+//   Console.WriteLine(portRange[i]);
+// }
