@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace PortManager.Interface
 {
-	public interface IPorts<P>
+	public interface IPorts<Ports>
 	{
-		void AddPort(P portRange);
-		void RemovePort(P portRange);
-		void RestartPorts(P portRange);
-		List<P> ListPorts();
+		void AddPort(Ports portRange);
+		void RemovePort(Ports portRange);
+		void RestartPorts(Ports portRange);
+		List<Ports> ListPorts();
 
 	}
 }
