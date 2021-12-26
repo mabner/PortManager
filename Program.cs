@@ -6,6 +6,29 @@ namespace PortManager
     {
         static void Main(string[] args)
         {
+			string choice = Menu();
+
+			while (choice != "5")
+			{
+				switch (choice)
+				{
+					case "1":
+						AddPort();
+						break;
+					case "2":
+						RemovePort();
+						break;
+					case "3":
+						RestartPorts();
+						break;
+					case "4":
+						ListPorts();
+						break;
+					default:
+						Console.WriteLine("Invalid choice");
+						break;
+				}
+			}
 
 		}
 
