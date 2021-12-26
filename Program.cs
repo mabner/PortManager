@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace PortManager
 {
@@ -7,6 +7,7 @@ namespace PortManager
 		static void Main(string[] args)
 		{
 			int choice = Menu();
+
 
 			while (choice != 5)
 			{
@@ -29,31 +30,39 @@ namespace PortManager
 						break;
 				}
 			}
-
 		}
-
-		private static void ListPorts()
+		public static void AddPort()
+		{
+			throw new NotImplementedException();
+		}
+		public static void RemovePort()
+		{
+			throw new NotImplementedException();
+		}
+		public static void RestartPorts()
+		{
+			throw new NotImplementedException();
+		}
+		public static void ListPorts()
 		{
 			throw new NotImplementedException();
 		}
 
-		private static void RestartPorts()
+		public static int FirstPort()
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("What is the first port? ");
+			int firstPort = int.Parse(Console.ReadLine());
+			return firstPort;
 		}
 
-		private static void RemovePort()
+		public static int LastPort()
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("What is the last port? ");
+			int lastPort = int.Parse(Console.ReadLine());
+			return lastPort;
 		}
 
-		private static void AddPort()
-		{
-			throw new NotImplementedException();
-		}
-
-
-		private static int Menu()
+		public static int Menu()
 		{
 			Console.WriteLine("1. Add Ports");
 			Console.WriteLine("2. Remove Ports");
