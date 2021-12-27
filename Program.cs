@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace PortManager
 {
@@ -26,18 +27,63 @@ namespace PortManager
                         ListPorts();
                         break;
                     default:
-                        Console.WriteLine("Invalid choice");
+                        Console.WriteLine("Opção inválida");
                         break;
                 }
             }
         }
         public static void AddPort()
         {
-            throw new NotImplementedException();
+            int[] portRange;
+
+            int firstPort = FirstPort();
+            int lastPort = LastPort();
+
+            portRange = new int[lastPort - firstPort + 1];
+            for (int i = 0; i < portRange.Length; i++)
+            {
+                portRange[i] = firstPort + i;
+            }
+
+
+            for (int i = 0; i < portRange.Length; i++)
+            {
+                string commandToExecute = @$"c:\\ligasistemas\\servidor\\ligasrv.exe /install -porta9{portRange[i].ToString().PadLeft(3, '0')}";
+                Process.Start(@"cmd", @"/c " + commandToExecute);
+                Console.WriteLine($"ligasrv /install -porta9{0}", portRange[i].ToString().PadLeft(3, '0'));
+            }
+            Console.Clear();
+            Console.WriteLine(".............................");
+            Console.WriteLine("Portas de " + firstPort + " à " + lastPort + " adicionadas");
+            Console.WriteLine(".............................");
+            Console.ReadKey();
+
         }
         public static void RemovePort()
         {
-            throw new NotImplementedException();
+            int[] portRange;
+
+            int firstPort = FirstPort();
+            int lastPort = LastPort();
+
+            portRange = new int[lastPort - firstPort + 1];
+            for (int i = 0; i < portRange.Length; i++)
+            {
+                portRange[i] = firstPort + i;
+            }
+
+
+            for (int i = 0; i < portRange.Length; i++)
+            {
+                string commandToExecute = @$"sc delete ligasrv9{portRange[i].ToString().PadLeft(3, '0')}";
+                Process.Start(@"cmd", @"/c " + commandToExecute);
+                Console.WriteLine($"sc delete ligasrv9{0}", portRange[i].ToString().PadLeft(3, '0'));
+            }
+            //Console.Clear();
+            Console.WriteLine(".............................");
+            Console.WriteLine("Portas de " + firstPort + " à " + lastPort + " removidas");
+            Console.WriteLine(".............................");
+            Console.ReadKey();
         }
         public static void RestartPorts()
         {
@@ -50,45 +96,27 @@ namespace PortManager
 
         public static int FirstPort()
         {
-            Console.WriteLine("What is the first port? ");
+            Console.WriteLine("Informe a primeira porta: ");
             int firstPort = int.Parse(Console.ReadLine());
             return firstPort;
         }
 
         public static int LastPort()
         {
-            Console.WriteLine("What is the last port? ");
+            Console.WriteLine("Informe a última porta: ");
             int lastPort = int.Parse(Console.ReadLine());
             return lastPort;
         }
 
-        // for (int i = 0; i < portRange.Length; i++) 
-        // {
-        //   Console.WriteLine(portRange[i]);
-        // }
-
-        public class Ports
-        {
-            int[] portRange = { };
-            public void PortRange(int firstPort, int lastPort)
-            {
-                portRange = new int[lastPort - firstPort + 1];
-                for (int i = 0; i < portRange.Length; i++)
-                {
-                    portRange[i] = firstPort + i;
-                }
-
-            }
-        }
 
         public static int Menu()
         {
-            Console.WriteLine("1. Add Ports");
-            Console.WriteLine("2. Remove Ports");
-            Console.WriteLine("3. Restart Ports");
-            Console.WriteLine("4. List Ports");
-            Console.WriteLine("5. Exit");
-            Console.WriteLine("Choose an option: ");
+            Console.WriteLine("1. Adicionar portas");
+            Console.WriteLine("2. Remover portas");
+            Console.WriteLine("3. Reiniciar portas");
+            Console.WriteLine("4. Listar portas");
+            Console.WriteLine("5. Sair");
+            Console.WriteLine("Escolha uma opção: ");
             int choice = int.Parse(Console.ReadLine());
             return choice;
         }
