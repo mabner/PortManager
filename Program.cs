@@ -10,7 +10,7 @@ namespace PortManager
             int choice = Menu();
 
 
-            while (choice != 5)
+            while (choice != 4)
             {
                 switch (choice)
                 {
@@ -22,9 +22,6 @@ namespace PortManager
                         break;
                     case 3:
                         RestartPorts();
-                        break;
-                    case 4:
-                        ListPorts();
                         break;
                     default:
                         Console.WriteLine("Opção inválida");
@@ -48,15 +45,17 @@ namespace PortManager
 
             for (int i = 0; i < portRange.Length; i++)
             {
-                string commandToExecute = @$"c:\\ligasistemas\\servidor\\ligasrv.exe /install -porta9{portRange[i].ToString().PadLeft(3, '0')}";
-                Process.Start(@"cmd", @"/c " + commandToExecute);
-                Console.WriteLine($"ligasrv /install -porta9{0}", portRange[i].ToString().PadLeft(3, '0'));
+                string commandToAdd = @$"c:\\ligasistemas\\servidor\\ligasrv.exe /install -porta9{portRange[i].ToString().PadLeft(3, '0')}";
+                Process.Start(@"cmd", @"/c " + commandToAdd);
             }
             Console.Clear();
             Console.WriteLine(".............................");
             Console.WriteLine("Portas de " + firstPort + " à " + lastPort + " adicionadas");
             Console.WriteLine(".............................");
-            Console.ReadKey();
+            firstPort = 0;
+            lastPort = 0;
+            TimeSpan.FromSeconds(5);
+            Menu();
 
         }
         public static void RemovePort()
@@ -75,23 +74,49 @@ namespace PortManager
 
             for (int i = 0; i < portRange.Length; i++)
             {
-                string commandToExecute = @$"sc delete ligasrv9{portRange[i].ToString().PadLeft(3, '0')}";
-                Process.Start(@"cmd", @"/c " + commandToExecute);
-                Console.WriteLine($"sc delete ligasrv9{0}", portRange[i].ToString().PadLeft(3, '0'));
+                string commandToRemove = @$"sc delete ligasrv9{portRange[i].ToString().PadLeft(3, '0')}";
+                Process.Start(@"cmd", @"/c " + commandToRemove);
+
             }
-            //Console.Clear();
+            Console.Clear();
             Console.WriteLine(".............................");
             Console.WriteLine("Portas de " + firstPort + " à " + lastPort + " removidas");
             Console.WriteLine(".............................");
-            Console.ReadKey();
+            firstPort = 0;
+            lastPort = 0;
+            TimeSpan.FromSeconds(5);
+            Menu();
         }
         public static void RestartPorts()
         {
-            throw new NotImplementedException();
-        }
-        public static void ListPorts()
-        {
-            throw new NotImplementedException();
+            int[] portRange;
+
+            int firstPort = FirstPort();
+            int lastPort = LastPort();
+
+            portRange = new int[lastPort - firstPort + 1];
+            for (int i = 0; i < portRange.Length; i++)
+            {
+                portRange[i] = firstPort + i;
+            }
+
+
+            for (int i = 0; i < portRange.Length; i++)
+            {
+                string commandToStop = @$"sc stop ligasrv9{portRange[i].ToString().PadLeft(3, '0')}";
+                Process.Start(@"cmd", @"/c " + commandToStop);
+                TimeSpan.FromSeconds(4);
+                string commandToStart = @$"sc start ligasrv9{portRange[i].ToString().PadLeft(3, '0')}";
+                Process.Start(@"cmd", @"/c " + commandToStart);
+            }
+            Console.Clear();
+            Console.WriteLine(".............................");
+            Console.WriteLine("Portas de " + firstPort + " à " + lastPort + " reiniciadas");
+            Console.WriteLine(".............................");
+            firstPort = 0;
+            lastPort = 0;
+            TimeSpan.FromSeconds(5);
+            Menu();
         }
 
         public static int FirstPort()
@@ -114,8 +139,7 @@ namespace PortManager
             Console.WriteLine("1. Adicionar portas");
             Console.WriteLine("2. Remover portas");
             Console.WriteLine("3. Reiniciar portas");
-            Console.WriteLine("4. Listar portas");
-            Console.WriteLine("5. Sair");
+            Console.WriteLine("4. Sair");
             Console.WriteLine("Escolha uma opção: ");
             int choice = int.Parse(Console.ReadLine());
             return choice;
