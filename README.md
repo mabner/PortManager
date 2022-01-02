@@ -1,2 +1,2 @@
 # Port Manager
-Permite criar e remover portas no range indicado.
+Permite criar, remover e reiniciar portas no range indicado.
