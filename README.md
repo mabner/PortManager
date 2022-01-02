@@ -2,11 +2,11 @@
 
 Permite criar, remover e reiniciar portas no range indicado.
 
-## Requisitos
+## 📝 Requisitos
 
 .Net Core 3.1
 
-## Uso
+## ⌨ Uso
 
 Single file build com o runtime embutido (não necessita instalar o .net core 3.1 na máquina que vai rodar o aplicativo):
 
